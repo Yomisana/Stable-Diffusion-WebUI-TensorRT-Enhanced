@@ -1,3 +1,8 @@
+# Foreword
+> This repository is a fork of the NVIDIA [Stable-Diffusion-WebUI-TensorRT](https://github.com/NVIDIA/Stable-Diffusion-WebUI-TensorRT) repository.  
+> And this repository will Enhanced some features and fix some bugs. If you have any questions, please feel free to open an issue. issue please make sure to provide detailed information about the issue you are facing.  
+> If you feel this repository is helpful to you, May give me a star or buy me a [coffee](https://ko-fi.com/yomisana) I will gladful :D
+
 # TensorRT Extension for Stable Diffusion
 
 This extension enables the best performance on NVIDIA RTX GPUs for Stable Diffusion with TensorRT.
