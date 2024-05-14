@@ -1,16 +1,16 @@
-# TensorRT Extension
+# TensorRT Enhanced 擴充說明
 
-This extension enables the best performance on NVIDIA RTX series GPUs for Stable Diffusion with TensorRT.
+此擴充可在 NVIDIA RTX 系列 GPU 上達到最佳效能，以實現 TensorRT 的穩定擴散。
 
-## Suggestions & Settings
-1. Go to Settings → Stable Diffusion(Categorize) → Extra Networks, Find "When adding to prompt, refer to Lora by". Choose filename, then Apply Setting → reload the UI.
-> **Tips**: Since the extension uses "filename" to indicate which model has not been exported, if you use "Alias ​​from file", there may be a gap between the "filename" prompted by the extension and you will not be able to find the corresponding model when exporting.
+## 建議與設定
+1. Go to Settings → Stable Diffusion(分類) → Extra Networks, Find "When adding to prompt, refer to Lora by". Choose filename, then Apply Setting → reload the UI.
+> **Tips**: 由於擴充功能使用“filename”來指示哪個模型尚未匯出，因此如果您使用“Alias from file”，則擴充功能提示的“filename”可能在匯出時會找不到對應的模型名稱。
 
-2. Enojy TensoRT Boost!
+1. 享受 TensoRT 所帶來的加速效果!
 
-> **Note**: Use this extension will only boost generation speed, When generation it will need go disk take export file from disk, so if you not put at SSD, it will not have much effect. (because it will take time to load file from disk or may longer)
+> **Note**: 使用這個擴充只會提高生成速度，生成時需要去硬碟中取出TensorRT的必要加速檔案，所以如果不放在SSD上，可能不會有太大影響。 （因為從硬碟載入檔案需要一段時間或可能更長）
 
-## How to use
+## 如何使用
 
 1. Click on the “Generate Default Engines” button. This step takes 2-10 minutes depending on your GPU. You can generate engines for other combinations.
 2. Go to Settings → User Interface → Quick Settings List, add sd_unet. Apply these settings, then reload the UI.

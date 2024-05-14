@@ -422,9 +422,9 @@ def on_ui_tabs():
         with gr.Row(equal_height=True):
             with gr.Column(variant="panel"):
                 with gr.Tabs(elem_id="trt_tabs"):
-                    with gr.Tab(label="TensorRT Exporter"):
+                    with gr.Tab(label="TensorRT SD Checkpoint"):
                         gr.Markdown(
-                            value="# TensorRT Exporter",
+                            value="# TensorRT Stable Diffusion Checkpoint Exporter",
                         )
 
                         default_vals = profile_presets.get_default(is_xl=False)
