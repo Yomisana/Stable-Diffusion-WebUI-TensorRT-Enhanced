@@ -65,3 +65,8 @@ Driver:
 - Windows: >= 452.39
 
 We always recommend keeping the driver up-to-date for system wide performance improvements.
+(This repository is only tested on Windows 10)
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Yomisana/Stable-Diffusion-WebUI-TensorRT-Enhanced&type=Date)](https://star-history.com/#Yomisana/Stable-Diffusion-WebUI-TensorRT-Enhanced&Date)
