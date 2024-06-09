@@ -649,8 +649,13 @@ def on_ui_tabs():
                             visible=False,
                         )
 
+                        # 定義刷新選項的函數
+                        def refresh_lora_options():
+                            new_choices = get_valid_lora_checkpoints()
+                            return gr.update(choices=new_choices)
                         lora_refresh_button.click(
-                            get_valid_lora_checkpoints,
+                            # get_valid_lora_checkpoints,
+                            refresh_lora_options,
                             None,
                             trt_lora_dropdown,
                         )
