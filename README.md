@@ -18,6 +18,12 @@ Example instructions for Automatic1111:
 3. Copy the link to this repository and paste it into URL for extension's git repository
 4. Click Install
 
+## ISSUE FIXED
+- if you pop the error message like this:
+```
+> The procedure entry point ... in the dynamic link library ... your_sdw_path\venv\Lib\site-packages\nvidia\cudnn\bin\cudnn64_8.dll some error like this message
+```
+A: Just this path ``your_sdw_path\venv\Lib\site-packages\nvidia\cudnn\bin\`` create backup folder and move all file to backup folder. And try to run the webui.bat again.
 
 ## How to use
 
