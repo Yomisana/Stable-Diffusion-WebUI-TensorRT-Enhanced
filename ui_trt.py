@@ -224,9 +224,9 @@ def export_lora_to_trt(lora_name, force_export):
 
     if os.path.exists(lora_trt_path) and not force_export:
         print(
-            "[TensorRT] engine found. Skipping build. You can enable Force Export in the Advanced Settings to force a rebuild if needed."
+            f"[TensorRT] engine found. Skipping build. You can enable Force Export in the Advanced Settings to force a rebuild {lora_name} if needed."
         )
-        return "## Exported Successfully \n"
+        return f"## Exported {lora_name} Successfully \n"
 
     profile = modelobj.get_input_profile(profile_settings)
     refit_dict = export_lora(
@@ -238,8 +238,8 @@ def export_lora_to_trt(lora_name, force_export):
     )
     save_file(refit_dict, lora_trt_path)
 
-    print("[TensorRT] Exported Successfully")
-    return "## Exported Successfully \n"
+    print(f"[TensorRT] Exported {lora_name} Successfully")
+    return f"## Exported {lora_name} Successfully \n"
 
 
 def get_version_from_filename(name):
