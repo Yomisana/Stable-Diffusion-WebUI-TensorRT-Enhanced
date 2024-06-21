@@ -10,13 +10,16 @@ You need to install the extension and generate optimized engines before using th
 Supports Stable Diffusion 1.5,2.1, SDXL, SDXL Turbo, and LCM. For SDXL and SDXL Turbo, we recommend using a GPU with 12 GB or more VRAM for best performance due to its size and computational intensity. 
 
 # DEMO
+- Fix Tab TensorRT LoRA refresh lora checkpoints list(can hot reload)
 ![Demo hot refresh](./readme_me_data/hot_load_lora_demo.gif)
+- Add lora not available will auto export lora
+![Demo auto export lora](./readme_me_data/auto_export_lora.gif)
 
 ## Features
 1. TensorRT LoRA tab - hot reload(refresh) LoRA checkpoints.
 2. When using TensorRT LoRA to generate, the console displays the initial loading TensorRT LoRA data progress bar.
 3. Fixed TensorRT LORA's inability to read subdirectories under the LORA directory and the inability to read files with parentheses and dots in their names.
-4. 
+4. Add a new feature to automatically export LoRA when the selected LoRA is not available.
 ## Installation
 Example instructions for Automatic1111:
 

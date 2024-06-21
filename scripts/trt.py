@@ -219,19 +219,31 @@ class TensorRTScript(scripts.Script):
         else:
             return
 
-        # Get pathes
-        print("[TensorRT] Apllying LoRAs: " + str(loras))
+        # Get paths
+        print("[TensorRT] Applying LoRAs: " + str(loras))
         available = modelmanager.available_loras()
         for lora in loras:
             lora_name, lora_scale = lora.split(":")[1:]
             lora_scales.append(float(lora_scale))
             if lora_name not in available:
-                raise Exception(
-                    f"Please export the LoRA checkpoint {lora_name} first from the TensorRT LoRA tab"
-                )
-            lora_pathes.append(
-                available[lora_name]
-            )
+                print(f"!![TensorRT] LoRA model {lora_name} not found. Exporting now...")
+                # Export the LoRA model if not available
+                export_result = ui_trt.export_lora_to_trt(lora_name, force_export=False)
+                print(export_result) # Print the export result it will print the "## Exported {lora_name} Successfully" message
+                if "No LoRA model found" in export_result:
+                    raise Exception(f"!![TensorRT] Please export the LoRA checkpoint {lora_name} first from the TensorRT LoRA tab")
+                available = modelmanager.available_loras()  # Refresh available LoRAs after exporting
+                if lora_name not in available:
+                    # print say check the Settings -> "When adding to prompt, refer to Lora by" option need choose "Filename" not Alias from file
+                    print(f"!![TensorRT] Please check the WebUI Settings -> 'When adding to prompt, refer to LoRA by' option need choose 'Filename' not 'Alias from file'")
+                    print("Then apply the settings and try to export the LoRA again.")
+                    # TODO:
+                    # here need code support LoRA alias can convert to filename D: then can use alias to export LoRA
+                    raise Exception(f"!![TensorRT] Failed to export the LoRA checkpoint {lora_name}. Please check the export logs.")
+                else:
+                    print(f"!![TensorRT] LoRA model {lora_name} export complete.")
+
+            lora_pathes.append(available[lora_name])
 
         # Merge lora refit dicts
         base_name, base_path = modelmanager.get_onnx_path(p.sd_model_name)
