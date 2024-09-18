@@ -38,7 +38,7 @@ def is_fp32():
     use_fp32 = False
     if cc_major < 7:
         use_fp32 = True
-        print("FP16 has been disabled because your GPU does not support it.")
+        print("[TensorRT Enhanced] FP16 has been disabled because your GPU does not support it.")
     return use_fp32
 
 
@@ -82,7 +82,7 @@ def export_unet_to_trt(
         profile_settings = profile_presets.get_default(is_xl=is_xl)
     use_fp32 = is_fp32()
 
-    print(f"Exporting {model_name} to TensorRT using - {profile_settings}")
+    print(f"[TensorRT Enhanced] Exporting {model_name} to TensorRT using - {profile_settings}")
     profile_settings.token_to_dim(static_shapes)
 
     model_hash = shared.sd_model.sd_checkpoint_info.hash
@@ -118,10 +118,10 @@ def export_unet_to_trt(
 
     if not os.path.exists(trt_path) or force_export:
         print(
-            "Building TensorRT engine... This can take a while, please check the progress in the terminal."
+            "[TensorRT Enhanced] Building TensorRT engine... This can take a while, please check the progress in the terminal."
         )
         gr.Info(
-            "Building TensorRT engine... This can take a while, please check the progress in the terminal."
+            "[TensorRT Enhanced] Building TensorRT engine... This can take a while, please check the progress in the terminal."
         )
         ret = export_trt(
             trt_path,
@@ -133,7 +133,7 @@ def export_unet_to_trt(
         if ret:
             return "## Export Failed due to unknown reason. See shell for more information. \n"
 
-        print("TensorRT engines has been saved to disk.")
+        print("[TensorRT Enhanced] TensorRT engines has been saved to disk.")
         modelmanager.add_entry(
             model_name,
             model_hash,
@@ -148,12 +148,12 @@ def export_unet_to_trt(
         )
     else:
         print(
-            "TensorRT engine found. Skipping build. You can enable Force Export in the Advanced Settings to force a rebuild if needed."
+            "[TensorRT Enhanced] TensorRT engine found. Skipping build. You can enable Force Export in the Advanced Settings to force a rebuild if needed."
         )
 
     gc.collect()
     torch.cuda.empty_cache()
-    print("[TensorRT] Exported Successfully")
+    print("[TensorRT Enhanced] Exported Successfully")
     return "## Exported Successfully \n"
 
 
@@ -185,7 +185,7 @@ def export_lora_to_trt(lora_name, force_export):
     version = lora_model.get("version", SDVersion.Unknown)
     if version == SDVersion.Unknown:
         print(
-            "LoRA SD version couldm't be determined. Please ensure the correct SD Checkpoint is selected."
+            "[TensorRT Enhanced] LoRA SD version couldm't be determined. Please ensure the correct SD Checkpoint is selected."
         )
 
     model_name = shared.sd_model.sd_checkpoint_info.model_name
@@ -193,12 +193,12 @@ def export_lora_to_trt(lora_name, force_export):
 
     if not version.match(shared.sd_model):
         print(
-            f"""LoRA SD version ({version}) does not match the current SD version ({model_name}). 
+            f"""[TensorRT Enhanced] LoRA SD version ({version}) does not match the current SD version ({model_name}). 
             Please ensure the correct SD Checkpoint is selected."""
         )
 
     profile_settings = profile_presets.get_default(is_xl=False)
-    print(f"Exporting {lora_name} to TensorRT using - {profile_settings}")
+    print(f"[TensorRT Enhanced] Exporting {lora_name} to TensorRT using - {profile_settings}")
     profile_settings.token_to_dim(True)
 
     onnx_base_filename, onnx_base_path = modelmanager.get_onnx_path(model_name)
@@ -224,7 +224,7 @@ def export_lora_to_trt(lora_name, force_export):
 
     if os.path.exists(lora_trt_path) and not force_export:
         print(
-            f"[TensorRT] engine found. Skipping build. You can enable Force Export in the Advanced Settings to force a rebuild {lora_name} if needed."
+            f"[TensorRT Enhanced] engine found. Skipping build. You can enable Force Export in the Advanced Settings to force a rebuild {lora_name} if needed."
         )
         return f"## Exported {lora_name} Successfully \n"
 
@@ -238,7 +238,7 @@ def export_lora_to_trt(lora_name, force_export):
     )
     save_file(refit_dict, lora_trt_path)
 
-    print(f"[TensorRT] Exported {lora_name} Successfully")
+    print(f"[TensorRT Enhanced] Exported {lora_name} Successfully")
     return f"## Exported {lora_name} Successfully \n"
 
 
@@ -275,7 +275,7 @@ def get_lora_checkpoints():
             )
         else:
             print(
-                """LoRA folder {} is not a safetensor. This might cause issues when exporting to TensorRT.
+                """[TensorRT Enhanced] LoRA folder {} is not a safetensor. This might cause issues when exporting to TensorRT.
                 Please ensure that the correct base model is selected when exporting.""".format(
                     filename 
                 )
@@ -293,7 +293,7 @@ def get_lora_checkpoints():
         else:
             version = SDVersion.Unknown
             print(
-                "No LoRA config file found for {}. You can generate it in the LoRA tab.".format(
+                "[TensorRT Enhanced] No LoRA config file found for {}. You can generate it in the LoRA tab.".format(
                     filename
                 )
             )
