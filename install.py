@@ -60,9 +60,17 @@ def install():
             live=True,
         )
     # ONNX
+    if launch.is_installed("onnx"):
+        if not version("onnx") == "1.16.1":
+            print("[TensorRT Enhanced] ONNX is not the correct version! Uninstalling...")
+            launch.run(
+                ["python", "-m", "pip", "uninstall", "-y", "onnx"],
+                "removing old version of onnx",
+            )
+
     if not launch.is_installed("onnx"):
         print("[TensorRT Enhanced] ONNX is not installed! Installing...")
-        launch.run_pip("install onnx", "onnx", live=True)
+        launch.run_pip("install onnx==1.16.1", "onnx", live=True)
 
     # OPTIMUM
     if not launch.is_installed("optimum"):
