@@ -95,7 +95,7 @@ class TrtUnet(sd_unet.SdUnet):
                 os.path.join(TRT_MODEL_DIR, self.loaded_config["filepath"])
             )
         self.engine.load()
-        print(f"\nLoaded Profile: {self.profile_idx}")
+        print(f"\n[TensorRT Enhanced] Loaded Profile: {self.profile_idx}")
         print(self.engine)
         self.engine_vram_req = self.engine.engine.device_memory_size
         self.engine.activate(True)
@@ -220,28 +220,28 @@ class TensorRTScript(scripts.Script):
             return
 
         # Get paths
-        print("[TensorRT] Applying LoRAs: " + str(loras))
+        print("[TensorRT Enhanced] Applying LoRAs: " + str(loras))
         available = modelmanager.available_loras()
         for lora in loras:
             lora_name, lora_scale = lora.split(":")[1:]
             lora_scales.append(float(lora_scale))
             if lora_name not in available:
-                print(f"!![TensorRT] LoRA model {lora_name} not found. Exporting now...")
+                print(f"!![TensorRT Enhanced] LoRA model {lora_name} not found. Exporting now...")
                 # Export the LoRA model if not available
                 export_result = ui_trt.export_lora_to_trt(lora_name, force_export=False)
                 print(export_result) # Print the export result it will print the "## Exported {lora_name} Successfully" message
                 if "No LoRA model found" in export_result:
-                    raise Exception(f"!![TensorRT] Please export the LoRA checkpoint {lora_name} first from the TensorRT LoRA tab")
+                    raise Exception(f"!![TensorRT Enhanced] Please export the LoRA checkpoint {lora_name} first from the TensorRT LoRA tab")
                 available = modelmanager.available_loras()  # Refresh available LoRAs after exporting
                 if lora_name not in available:
                     # print say check the Settings -> "When adding to prompt, refer to Lora by" option need choose "Filename" not Alias from file
-                    print(f"!![TensorRT] Please check the WebUI Settings -> 'When adding to prompt, refer to LoRA by' option need choose 'Filename' not 'Alias from file'")
+                    print(f"!![TensorRT Enhanced] Please check the WebUI Settings -> 'When adding to prompt, refer to LoRA by' option need choose 'Filename' not 'Alias from file'")
                     print("Then apply the settings and try to export the LoRA again.")
                     # TODO:
                     # here need code support LoRA alias can convert to filename D: then can use alias to export LoRA
-                    raise Exception(f"!![TensorRT] Failed to export the LoRA checkpoint {lora_name}. Please check the export logs.")
+                    raise Exception(f"!![TensorRT Enhanced] Failed to export the LoRA checkpoint {lora_name}. Please check the export logs.")
                 else:
-                    print(f"!![TensorRT] LoRA model {lora_name} export complete.")
+                    print(f"!![TensorRT Enhanced] LoRA model {lora_name} export complete.")
 
             lora_pathes.append(available[lora_name])
 
@@ -303,7 +303,7 @@ class TensorRTScript(scripts.Script):
         sd_unet.current_unet.option = sd_unet_option
         sd_unet.current_unet_option = sd_unet_option
 
-        print(f"Activating unet: {sd_unet.current_unet.option.label}")
+        print(f"[TensorRT Enhanced] Activating unet: {sd_unet.current_unet.option.label}")
         sd_unet.current_unet.activate()
 
     def process_batch(self, p, *args, **kwargs):

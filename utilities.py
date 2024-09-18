@@ -197,7 +197,7 @@ class Engine:
 
         assert set(refitted_weights) == set(refit_weights.keys())
         if not refitter.refit_cuda_engine():
-            print("Error: failed to refit new weights.")
+            print("[TensorRT Enhanced] Error: failed to refit new weights.")
             exit(0)
 
     def build(
@@ -211,7 +211,7 @@ class Engine:
         timing_cache=None,
         update_output_names=None,
     ):
-        print(f"Building TensorRT engine for {onnx_path}: {self.engine_path}")
+        print(f"[TensorRT Enhanced] Building TensorRT engine for {onnx_path}: {self.engine_path}")
         p = [Profile()]
         if input_profile:
             p = [Profile() for i in range(len(input_profile))]
@@ -228,7 +228,7 @@ class Engine:
             onnx_path, flags=[trt.OnnxParserFlag.NATIVE_INSTANCENORM]
         )
         if update_output_names:
-            print(f"Updating network outputs to {update_output_names}")
+            print(f"[TensorRT Enhanced] Updating network outputs to {update_output_names}")
             network = ModifyNetworkOutputs(network, update_output_names)
 
         builder = network[0]
@@ -247,7 +247,7 @@ class Engine:
                 cache = config.create_timing_cache(timing_cache_data)
         except FileNotFoundError:
             warning(
-                "Timing cache file {} not found, falling back to empty timing cache.".format(
+                "[TensorRT Enhanced] Timing cache file {} not found, falling back to empty timing cache.".format(
                     timing_cache
                 )
             )
@@ -279,7 +279,7 @@ class Engine:
         return 0
 
     def load(self):
-        print(f"Loading TensorRT engine: {self.engine_path}")
+        print(f"[TensorRT Enhanced] Loading TensorRT engine: {self.engine_path}")
         self.engine = engine_from_bytes(bytes_from_path(self.engine_path))
 
     def activate(self, reuse_device_memory=None):
