@@ -22,7 +22,7 @@ def merge_loras(loras: List[str], scales: List[str]) -> dict:
                     refit_dict[k] = scale * v
                 pbar.update(1)
                 pbar.refresh()
-    print("[TensorRT] LoRA loading completed.")
+    print("[TensorRT Enhanced] LoRA loading completed.")
     return refit_dict
 
 
@@ -31,7 +31,7 @@ def apply_loras(base_path: str, loras: List[str], scales: List[str]) -> dict:
     # apply base model from stable_diffusion_2080ti\models\Unet-onnx\owo_checkpoint.onnx for refit, lora: ['stable_diffusion_2080ti\\models\\Unet-trt\\owo_lora.lora']
     base_name = os.path.basename(base_path)
     lora_names = [os.path.basename(os.path.dirname(lora)) for lora in loras]
-    print(f"[TensorRT] apply base model from {base_name} for refit lora: {lora_names}")
+    print(f"[TensorRT Enhanced] apply base model from {base_name} for refit lora: {lora_names}")
     base = onnx.load(base_path)
     onnx_opt_dir = os.path.dirname(base_path)
     def convert_int64(arr):
@@ -54,5 +54,5 @@ def apply_loras(base_path: str, loras: List[str], scales: List[str]) -> dict:
 
             pbar.update(1)
             pbar.refresh()
-    print("[TensorRT] LoRA apply completed.")
+    print("[TensorRT Enhanced] LoRA apply completed.")
     return refit_dict

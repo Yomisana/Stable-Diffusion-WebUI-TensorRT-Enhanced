@@ -11,9 +11,9 @@ Supports Stable Diffusion 1.5,2.1, SDXL, SDXL Turbo, and LCM. For SDXL and SDXL 
 
 # DEMO
 - Fix Tab TensorRT LoRA refresh lora checkpoints list(can hot reload)
-![Demo hot refresh](./readme_me_data/hot_load_lora_demo.gif)
+![Demo hot refresh](./.github/image/hot_load_lora_demo.gif)
 - Add lora not available will auto export lora
-![Demo auto export lora](./readme_me_data/auto_export_lora.gif)
+![Demo auto export lora](./.github/image/auto_export_lora.gif)
 
 ## Features
 1. TensorRT LoRA tab - hot reload(refresh) LoRA checkpoints.
