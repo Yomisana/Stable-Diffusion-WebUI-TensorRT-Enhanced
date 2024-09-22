@@ -37,10 +37,13 @@ A: Just this path ``your_sdw_path\venv\Lib\site-packages\nvidia\cudnn\bin\`` cre
 
 ## How to use
 
-1. Click on the “Generate Default Engines” button. This step takes 2-10 minutes depending on your GPU. You can generate engines for other combinations.
-2. Go to Settings → User Interface → Quick Settings List, add sd_unet. Apply these settings, then reload the UI.
-3. Back in the main UI, select “Automatic” from the sd_unet dropdown menu at the top of the page if not already selected.
+1. Go to Settings → User Interface → Quick Settings List, add sd_unet. Apply these settings, then reload the UI.
+3. Click on the “Generate Default Engines” button. This step takes 2-10 minutes depending on your GPU. You can generate engines for other combinations.
+3. Back in the main UI, select “Automatic” from the sd_unet dropdown menu at the top of the page if not already selected(None).
 4. You can now start generating images accelerated by TRT. If you need to create more Engines, go to the TensorRT tab.
+
+> ## when the selected "checkpoint" is not available won't be automatically generate engines, user need to manually generate engines.
+> # 🚧Frist time generate engines need wait more longer cause "timing cache" need cache🚧
 
 Happy prompting!
 
