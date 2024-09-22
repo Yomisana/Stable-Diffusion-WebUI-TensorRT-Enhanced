@@ -15,6 +15,7 @@ from utilities import Engine
 from model_manager import TRT_MODEL_DIR, modelmanager
 from datastructures import ModelType
 from scripts.lora import apply_loras
+from lib import detect_webui_version
 
 G_LOGGER.module_severity = G_LOGGER.ERROR
 
