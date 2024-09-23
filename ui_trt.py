@@ -432,7 +432,7 @@ def on_ui_tabs():
                             label="Preset",
                             choices=profile_presets.get_choices(),
                             elem_id="sd_version",
-                            default="Default",
+                            # default="Default",
                             value="Default",
                         )
 
@@ -632,7 +632,8 @@ def on_ui_tabs():
                             choices=get_valid_lora_checkpoints(),
                             elem_id="lora_model",
                             label="LoRA Model",
-                            default=None,
+                            # default=None,
+                            value=None,
                         )
 
                         with FormRow(elem_classes="checkboxes-row", variant="compact"):
