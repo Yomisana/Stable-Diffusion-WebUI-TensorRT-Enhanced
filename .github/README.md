@@ -20,6 +20,8 @@ Supports Stable Diffusion 1.5,2.1, SDXL, SDXL Turbo, and LCM. For SDXL and SDXL 
 2. When using TensorRT LoRA to generate, the console displays the initial loading TensorRT LoRA data progress bar.
 3. Fixed TensorRT LORA's inability to read subdirectories under the LORA directory and the inability to read files with parentheses and dots in their names.
 4. Add a new feature to automatically export LoRA when the selected LoRA is not available.
+5. support automatic1111 webui and forge webui. 
+> # 🚧Forge webui only can use already export checkpoint and lora!🚧
 ## Installation
 Example instructions for Automatic1111:
 

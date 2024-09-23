@@ -27,6 +27,6 @@ def clean_pycache():
         for dir_name in dirs:
             if dir_name == "__pycache__":
                 dir_path = os.path.join(root, dir_name)
-                print(f"Deleting: {dir_path}")
+                print(f"[TensorRT Enhanced] Deleting: {dir_path}")
                 shutil.rmtree(dir_path)
     print("[TensorRT Enhanced] Cleaned __pycache__ folder.")
