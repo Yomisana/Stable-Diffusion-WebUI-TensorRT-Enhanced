@@ -15,6 +15,7 @@ from utilities import Engine
 from model_manager import TRT_MODEL_DIR, modelmanager
 from datastructures import ModelType
 from scripts.lora import apply_loras
+from lib import detect_webui_version
 
 G_LOGGER.module_severity = G_LOGGER.ERROR
 
@@ -287,17 +288,31 @@ class TensorRTScript(scripts.Script):
         if sd_unet.current_unet is not None:
             sd_unet.current_unet.deactivate()
 
-        if self.torch_unet:
-            gr.Warning("Enabling PyTorch fallback as no engine was found.")
-            sd_unet.current_unet = None
-            sd_unet.current_unet_option = sd_unet_option
-            shared.sd_model.model.diffusion_model.to(devices.device)
-            return
-        else:
-            shared.sd_model.model.diffusion_model.to(devices.cpu)
-            devices.torch_gc()
-            if self.lora_refit_dict:
-                self.update_lora = True
+        # shared.sd_model.model.diffusion_model.to(devices.device)
+        # shared.sd_model 裡面的 sd_models_types.WebuiSdModel 在 forge 上是被註解的
+        # https://github.com/AUTOMATIC1111/stable-diffusion-webui/blob/master/modules/sd_models_types.py => https://github.com/lllyasviel/stable-diffusion-webui-forge/blob/main/modules/sd_models_types.py
+        # print(f"[TensorRT Enhanced debug]{type(shared.sd_model.model.diffusion_model)}") # <class 'ldm.modules.diffusionmodules.openaimodel.UNetModel'>
+        # print(f"[TensorRT Enhanced debug]{shared.sd_model.model.diffusion_model}") # 一大串的東西
+        # print(f"[TensorRT Enhanced debug]{shared.sd_model.model.diffusion_model} {devices.device}") # 一大串的東西 然後 cuda
+        # print(f"[TensorRT Enhanced debug]{shared.sd_model.model.diffusion_model} {devices.cpu}") # 一大串的東西 然後 cpu
+        # <class 'ldm.modules.diffusionmodules.openaimodel.UNetModel'>
+        # 直接抓源頭的 from ldm.models.diffusion.ddpm import LatentDiffusion 結果在 https://github.com/AUTOMATIC1111/stable-diffusion-webui/blob/master/modules/models/diffusion/ddpm_edit.py#L458
+        # 然後被註解掉了...
+        # print(f"[TensorRT Enhanced debug]{type(diffusion_model)}") # 一大串的東西
+        # print(f"[TensorRT Enhanced debug]{diffusion_model} {devices.device}") # 一大串的東西 然後 cuda
+        ## 下面的這段是原本的程式碼 但是在 forge 上被註解掉了 看看是不是不需要
+        ##if self.torch_unet:
+        ##    gr.Warning("Enabling PyTorch fallback as no engine was found.")
+        ##    sd_unet.current_unet = None
+        ##    sd_unet.current_unet_option = sd_unet_option
+        ##    # shared.py sd_model => sd_models_types.py WebuiSdModel
+        ##    shared.sd_model.model.diffusion_model.to(devices.device)
+        ##    return
+        ##else:
+        ##    shared.sd_model.model.diffusion_model.to(devices.cpu)
+        ##    devices.torch_gc()
+        ##    if self.lora_refit_dict:
+        ##        self.update_lora = True
         sd_unet.current_unet = sd_unet_option.create_unet()
         sd_unet.current_unet.profile_idx = self.idx
         sd_unet.current_unet.option = sd_unet_option
