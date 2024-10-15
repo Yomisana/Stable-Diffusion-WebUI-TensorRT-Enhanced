@@ -1,7 +1,7 @@
 # Foreword
 > This repository is a fork of the NVIDIA [Stable-Diffusion-WebUI-TensorRT](https://github.com/NVIDIA/Stable-Diffusion-WebUI-TensorRT) repository.  
 > And this repository will Enhanced some features and fix some bugs. If you have any questions, please feel free to open an issue. issue please make sure to provide detailed information about the issue you are facing.  
-> If you feel this repository is helpful to you, May give me a star or buy me a [coffee](https://ko-fi.com/yomisana) I will gladful :D
+> If you feel this repository is helpful to you, May give me this repo a star :D
 
 # TensorRT Extension for Stable Diffusion
 
@@ -9,6 +9,10 @@ This extension enables the best performance on NVIDIA RTX GPUs for Stable Diffus
 You need to install the extension and generate optimized engines before using the extension. Please follow the instructions below to set everything up.
 Supports Stable Diffusion 1.5,2.1, SDXL, SDXL Turbo, and LCM. For SDXL and SDXL Turbo, we recommend using a GPU with 12 GB or more VRAM for best performance due to its size and computational intensity. 
 
+# 🚧Forge webui only run already export checkpoint and lora!🚧
+> Export feature only on Automatic1111 works.  
+> if you know sdw forge else alternatives endpoint get(hijack) about checkpoint,Lora data modules,pull requests it :D  
+> any details on [#1](https://github.com/Yomisana/Stable-Diffusion-WebUI-TensorRT-Enhanced/issues/1) issue and discuss.
 # DEMO
 - Fix Tab TensorRT LoRA refresh lora checkpoints list(can hot reload)
 ![Demo hot refresh](./image/hot_load_lora_demo.gif)
@@ -21,7 +25,9 @@ Supports Stable Diffusion 1.5,2.1, SDXL, SDXL Turbo, and LCM. For SDXL and SDXL 
 3. Fixed TensorRT LORA's inability to read subdirectories under the LORA directory and the inability to read files with parentheses and dots in their names.
 4. Add a new feature to automatically export LoRA when the selected LoRA is not available.
 5. support automatic1111 webui and forge webui. 
-> # 🚧Forge webui only can use already export checkpoint and lora!🚧
+> # 🚧Forge webui only run already export checkpoint and lora!🚧
+> # 🚧Forge webui only run already export checkpoint and lora!🚧
+> # 🚧Forge webui only run already export checkpoint and lora!🚧
 ## Installation
 Example instructions for Automatic1111:
 
