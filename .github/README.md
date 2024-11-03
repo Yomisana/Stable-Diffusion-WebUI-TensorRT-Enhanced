@@ -28,6 +28,11 @@ Supports Stable Diffusion 1.5,2.1, SDXL, SDXL Turbo, and LCM. For SDXL and SDXL 
 <!-- > # 🚧Forge webui only run already export checkpoint and lora!🚧
 > # 🚧Forge webui only run already export checkpoint and lora!🚧
 > # 🚧Forge webui only run already export checkpoint and lora!🚧 -->
+
+## support non-webui?
+- Right now only supprt A41 webui.
+> I would be very happy, if other non-webui extensions could be developed, but in fact, the current situation does not have many development extension documents to support developers' motivation to develop extensions, so this can only take time to settle.
+
 ## Installation
 Example instructions for Automatic1111:
 
